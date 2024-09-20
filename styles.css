@@ -7,33 +7,41 @@ body {
     height: 100vh;
     margin: 0;
     background-color: #f4f4f4;
+    overflow: hidden; /* Prevent scrolling */
 }
+
 #timerDisplay {
     font-size: 24px;
     margin-bottom: 10px;
 }
+
 #fastestTimes {
     margin-bottom: 20px;
     font-size: 18px;
 }
+
 #equation {
     font-size: 24px;
     margin-bottom: 20px;
-    display: none; /* Initially hidden */
 }
+
 table {
     border-collapse: collapse;
     margin-top: 20px;
+    max-width: 90%; /* Ensure table fits well */
 }
+
 th, td {
     border: 1px solid #007BFF;
     padding: 10px;
     text-align: center;
 }
+
 th {
     background-color: #007BFF;
     color: white;
 }
+
 button {
     padding: 10px 20px;
     font-size: 16px;
@@ -44,12 +52,22 @@ button {
     border-radius: 5px;
     margin: 5px;
 }
+
 button:hover {
     background-color: #0056b3;
 }
+
 input {
     padding: 10px;
     font-size: 16px;
     width: 200px;
     margin: 10px;
+}
+
+canvas {
+    max-width: 100%;
+    width: 100%; /* Full width */
+    height: 150px; /* Set a smaller height */
+    margin-top: 20px;
+    display: block; /* Block display */
 }

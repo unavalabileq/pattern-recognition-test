@@ -7,6 +7,11 @@ let fastestTimes = {
     quadratic: null,
     cubic: null
 };
+let graphData = {
+    labels: [],
+    values: []
+};
+let isGraphVisible = false;
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -47,6 +52,11 @@ function generateEquation() {
     document.getElementById('equation').innerText = equationText;
     document.getElementById('equation').style.display = 'none';
     calculateValues();
+    
+    // Update graph if visible
+    if (isGraphVisible) {
+        updateGraph();
+    }
 }
 
 function updateTimer() {
@@ -128,6 +138,9 @@ function calculateValues() {
     headerRow.innerHTML = '<th>x</th>'; // Reset header row
     vRow.innerHTML = '<th>v</th>'; // Reset v row
 
+    graphData.labels = [];
+    graphData.values = [];
+
     for (let x = -5; x <= 5; x++) {
         let v;
         if (currentEquation.type === 'linear') {
@@ -147,7 +160,71 @@ function calculateValues() {
 
         headerRow.innerHTML += `<td>${x}</td>`;
         vRow.innerHTML += `<td>${v}</td>`;
+        
+        // Store data for graphing
+        graphData.labels.push(x);
+        graphData.values.push(v);
     }
 
     resultsTable.style.display = 'table'; // Show the table
+}
+
+function showGraph() {
+    isGraphVisible = true;
+    updateGraph();
+}
+function updateGraph() {
+    const ctx = document.getElementById('equationGraph').getContext('2d');
+    document.getElementById('equationGraph').style.display = 'block';
+
+    // Clear existing graph if any
+    if (window.equationChart) {
+        window.equationChart.destroy();
+    }
+
+    window.equationChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: graphData.labels,
+            datasets: [{
+                label: 'Equation Values',
+                data: graphData.values.map(v => typeof v === 'number' ? v : parseFloat(v.split('/')[0]) / parseFloat(v.split('/')[1])),
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: true
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'x values',
+                        font: {
+                            size: 16 // Larger title font size
+                        }
+                    },
+                    ticks: {
+                        font: {
+                            size: 14 // Larger tick font size
+                        }
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'v values',
+                        font: {
+                            size: 16 // Larger title font size
+                        }
+                    },
+                    ticks: {
+                        font: {
+                            size: 14 // Larger tick font size
+                        }
+                    }
+                }
+            }
+        }
+    });
 }

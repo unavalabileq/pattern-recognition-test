@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Math Equations</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -23,6 +24,8 @@
     
     <div id="livesDisplay">Lives: 3</div>
     
+    <button onclick="showGraph()">Show Graph</button>
+
     <table id="results" style="display:none;">
         <thead>
             <tr id="headerRow">
@@ -35,6 +38,8 @@
             </tr>
         </tbody>
     </table>
+
+    <canvas id="equationGraph" style="display:none; margin-top: 20px; width: 100%; max-width: 600px;"></canvas>
 
     <script src="script.js"></script>
 </body>
