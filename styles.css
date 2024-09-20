@@ -8,6 +8,14 @@ body {
     margin: 0;
     background-color: #f4f4f4;
 }
+#timerDisplay {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+#fastestTimes {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
 #equation {
     font-size: 24px;
     margin-bottom: 20px;
